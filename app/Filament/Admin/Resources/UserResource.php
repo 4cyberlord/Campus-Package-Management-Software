@@ -10,7 +10,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules\Password;
 
 class UserResource extends Resource
 {
@@ -18,9 +17,11 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
-    protected static ?string $navigationGroup = 'User Management';
+    protected static ?string $navigationLabel = 'Users';
 
-    protected static ?int $navigationSort = -2;
+    protected static ?string $modelLabel = 'User';
+
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {
@@ -55,11 +56,10 @@ class UserResource extends Resource
                             ->required(fn (string $context): bool => $context === 'create'),
 
                         Forms\Components\Select::make('roles')
-                            ->label('User Role')
+                            ->multiple(false)
                             ->relationship('roles', 'name')
                             ->preload()
-                            ->required()
-                            ->multiple(false),
+                            ->required(),
                     ])
                     ->columns(2)
             ]);

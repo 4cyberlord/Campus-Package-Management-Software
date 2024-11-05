@@ -33,15 +33,10 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
-        // For student panel, allow access during registration
-        if ($panel->getId() === 'student') {
-            return true; // Allow access to student panel by default
-        }
-
-        // For admin and manager panels, check roles strictly
         return match ($panel->getId()) {
             'admin' => $this->hasRole(['admin', 'super_admin']),
             'manager' => $this->hasRole('manager'),
+            'student' => $this->hasRole('student'),
             default => false
         };
     }
