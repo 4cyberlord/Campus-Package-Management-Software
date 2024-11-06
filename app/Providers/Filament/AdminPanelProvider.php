@@ -20,6 +20,13 @@ use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use App\Filament\Widgets\StatsOverview;
+use App\Filament\Widgets\PackageStatusChart;
+use App\Filament\Widgets\LatestPackages;
+use App\Filament\Widgets\PackagesThisWeek;
+use App\Filament\Widgets\TopStudents;
+use App\Filament\Widgets\RecentActivity;
+use App\Filament\Widgets\PackageDeliveryStats;
 
 
 class AdminPanelProvider extends PanelProvider
@@ -51,8 +58,13 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Admin/Widgets'), for: 'App\\Filament\\Admin\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                StatsOverview::class,
+                PackageDeliveryStats::class,
+                PackageStatusChart::class,
+                PackagesThisWeek::class,
+                LatestPackages::class,
+                TopStudents::class,
+                RecentActivity::class,
             ])
             ->middleware([
                 EncryptCookies::class,

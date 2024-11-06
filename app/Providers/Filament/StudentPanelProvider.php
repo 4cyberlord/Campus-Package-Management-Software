@@ -17,6 +17,9 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use App\Filament\Student\Widgets\MyPackagesOverview;
+use App\Filament\Student\Widgets\LatestPackages;
+use App\Filament\Student\Widgets\PackageStatusChart;
 
 class StudentPanelProvider extends PanelProvider
 {
@@ -52,6 +55,11 @@ class StudentPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+            ])
+            ->widgets([
+                MyPackagesOverview::class,
+                PackageStatusChart::class,
+                LatestPackages::class,
             ]);
     }
 }
